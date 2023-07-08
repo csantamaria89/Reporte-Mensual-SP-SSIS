@@ -1,0 +1,47 @@
+USE MASTER
+GO
+
+IF EXISTS(SELECT NAME FROM SYS.databases WHERE NAME='BICICLETA')
+BEGIN
+	DROP DATABASE BICICLETA
+END
+GO
+
+CREATE DATABASE BICICLETA
+GO
+
+USE BICICLETA
+GO
+
+CREATE TABLE CLIENTES(
+Fecha int,
+Periodo int,
+CustomerID NCHAR(5),
+CompanyName NVARCHAR(40),
+ContactName NVARCHAR(30),
+ContactTitle NVARCHAR(30),
+Address NVARCHAR(60),
+City NVARCHAR(15),
+Region NVARCHAR(15),
+PostalCode NVARCHAR(10),
+Country NVARCHAR(15),
+Phone NVARCHAR(24),
+Fax NVARCHAR(24),
+EmployeeID INT,
+OrderDate DATETIME,
+RequieredDate DATETIME,
+ShippedDate DATETIME,
+ShipVia INT,
+Freight MONEY,
+ShipName NVARCHAR(40),
+ShipAddress NVARCHAR(60),
+ShipCity NVARCHAR(15),
+ShipRegion NVARCHAR(15),
+ShipPostalCode NVARCHAR(10),
+ShipCountry NVARCHAR(15),
+ProductID INT,
+UnitPrice MONEY,
+Quantity SMALLINT,
+Discount REAL
+)
+GO
