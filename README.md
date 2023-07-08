@@ -15,5 +15,34 @@ En nuestro proyecto de Integración de Servicios creamos las siguientes variable
 
 Ahora utilizamos <b>Execute SQl Task</b> dónde configuramos la conexión a la DB, en este caso Bicicleta y agregamos SQLStatement ```DELETE FROM CLIENTES WHERE Fecha = ?```
 <p align="center">
-<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen2.png"  height=450>
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen2.png"  height=350>
 </p>
+
+Agregamos un Data Flow Task para hacer la carga de data. Utilizamos como origen un Excel Source y agregamos la ruta del archivo con la fecha de hoy.
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen3.png"  height=350>
+</p>
+
+Convertimos los valores que utilizaremos:
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen4.png"  height=350>
+</p>
+
+Estableceremos la secuencia de las variables Periodo y Fecha con Derived Column:
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen5.png"  height=350>
+</p>
+
+Ahora agregamos la DB destino. <b>Nota:</b> En la parte de Mappings se copian todas las variables menos Fecha y Periodo.
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen6.png"  height=350>
+</p>
+
+Ahora vamos a establecer la conexión dinámica  hacia el archivo de Excel: Propiedades/ ExcelFilePath 
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen7.png"  height=350>
+</p>
+
+```@[User::Ruta]+"ClientesNuevos_"+ (DT_WSTR, 8) @[User::Fecha]+".xlsx"```
+
+
