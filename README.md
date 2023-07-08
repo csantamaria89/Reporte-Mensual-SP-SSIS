@@ -14,3 +14,6 @@ En nuestro proyecto de Integración de Servicios creamos las siguientes variable
 </p>
 
 Ahora utilizamos <b>Execute SQl Task</b> dónde configuramos la conexión a la DB, en este caso Bicicleta y agregamos SQLStatement ```DELETE FROM CLIENTES WHERE Fecha = ?```
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen2.png"  height=450>
+</p>
