@@ -45,4 +45,77 @@ Ahora vamos a establecer la conexión dinámica  hacia el archivo de Excel: Prop
 
 ```@[User::Ruta]+"ClientesNuevos_"+ (DT_WSTR, 8) @[User::Fecha]+".xlsx"```
 
+Ahora creamos los SP en las DB Bicicleta
 
+<b> SP Insertar Clientes </b>
+
+```Ruby
+USE [BICICLETA]
+GO
+/****** Object:  StoredProcedure [dbo].[SP_InsertarClientes]    Script Date: 8/07/2023 12:47:18 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SP_InsertarClientes]
+AS
+	IF EXISTS(
+		SELECT CustomerID FROM BICICLETA.dbo.CLIENTES WHERE CustomerID COLLATE SQL_Latin1_General_CP1_CI_AS NOT IN (SELECT CustomerID FROM NORTHWND.dbo.Customers)
+	)
+	BEGIN
+		INSERT INTO NORTHWND.dbo.Customers([CustomerID], [CompanyName], [ContactName], [ContactTitle], [Address], [City], [Region], [PostalCode], [Country], [Phone], [Fax])
+		SELECT CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country, Phone, Fax FROM BICICLETA.dbo.CLIENTES
+		WHERE Fecha=CAST(CAST(YEAR(GETDATE()) AS VARCHAR(4)) + RIGHT('0'+CAST(MONTH(GETDATE()) AS VARCHAR(2)),2)+RIGHT('0'+CAST(DAY(GETDATE()) AS VARCHAR(2)),2) AS INT)
+
+		PRINT 'SE INSERTARON REGISTROS EN LA TABLA CUSTOMERS DE NORTHWND'
+	END ELSE
+	BEGIN
+		PRINT 'YA SE ENCUENTRAN REGISTRADOS LOS CLIENTES'
+	END
+```
+<b> SP Insertar Ordenes </b>
+
+```Ruby
+CREATE PROCEDURE SP_IntertarOrdenes
+AS
+	IF EXISTS(
+		SELECT CustomerID FROM BICICLETA.dbo.CLIENTES WHERE CustomerID COLLATE SQL_Latin1_General_CP1_CI_AS NOT IN (SELECT CustomerID FROM NORTHWND.dbo.Orders)
+	)
+	BEGIN
+		INSERT INTO NORTHWND.dbo.Orders([CustomerID], [EmployeeID], [OrderDate], [RequiredDate], [ShippedDate], [ShipVia], [Freight], [ShipName], [ShipAddress], [ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry])
+		SELECT CustomerID, EmployeeID, OrderDate, RequieredDate, ShippedDate, ShipVia, Freight, ShipName, ShipAddress, ShipCity, ShipRegion, ShipPostalCode, ShipCountry FROM BICICLETA.dbo.CLIENTES
+		WHERE Fecha=CAST(CAST(YEAR(GETDATE()) AS VARCHAR(4)) + RIGHT('0'+CAST(MONTH(GETDATE()) AS VARCHAR(2)),2)+RIGHT('0'+CAST(DAY(GETDATE()) AS VARCHAR(2)),2) AS INT)
+
+		PRINT 'SE INSERTARON REGISTROS EN LA TABLA ORDERS DE NORTHWND'
+	END ELSE
+	BEGIN
+		PRINT 'YA SE ENCUENTRAN REGISTRADOS LOS PEDIDOS'
+	END
+	GO
+GO```
+
+<b> SP Insertar Detalles Ordenes </b>
+
+```Ruby
+CREATE PROCEDURE SP_IntertarDetallesOrdenes
+AS
+	IF EXISTS(
+		SELECT OrderID FROM NORTHWND.dbo.Orders WHERE OrderID NOT IN (SELECT OrderID FROM NORTHWND.dbo.[Order Details])
+	)
+	BEGIN
+		INSERT INTO NORTHWND.dbo.[Order Details]([OrderID], [ProductID], [UnitPrice], [Quantity], [Discount])
+		SELECT O.OrderID, C.ProductID, C.UnitPrice, C.Quantity, C.Discount
+		FROM BICICLETA.DBO.CLIENTES AS C
+		INNER JOIN NORTHWND.DBO.Customers AS N
+		ON C.CustomerID COLLATE Modern_Spanish_CI_AS=N.CustomerID
+		INNER JOIN NORTHWND.DBO.Orders AS O
+		ON N.CustomerID=O.CustomerID
+		WHERE C.Fecha=CAST(CAST(YEAR(GETDATE()) AS VARCHAR(4)) + RIGHT('0'+CAST(MONTH(GETDATE()) AS VARCHAR(2)),2)+RIGHT('0'+CAST(DAY(GETDATE()) AS VARCHAR(2)),2) AS INT)
+
+		PRINT 'SE INSERTARON REGISTROS EN LA TABLA [ORDER DETAILS] DE NORTHWND'
+	END ELSE
+	BEGIN
+		PRINT 'YA SE ENCUENTRAN REGISTRADOS LOS DETALLES DE LOS PEDIDOS'
+	END
+	GO
+GO```
