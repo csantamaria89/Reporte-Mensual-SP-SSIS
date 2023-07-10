@@ -45,7 +45,7 @@ Ahora vamos a establecer la conexión dinámica  hacia el archivo de Excel: Prop
 
 ```@[User::Ruta]+"ClientesNuevos_"+ (DT_WSTR, 8) @[User::Fecha]+".xlsx"```
 
-Ahora creamos los SP en las DB Bicicleta
+Ahora creamos los SP en la DB Bicicleta
 
 <b> SP Insertar Clientes </b>
 
@@ -92,11 +92,13 @@ AS
 		PRINT 'YA SE ENCUENTRAN REGISTRADOS LOS PEDIDOS'
 	END
 	GO
-GO```
+GO
+```
 
 <b> SP Insertar Detalles Ordenes </b>
 
 ```Ruby
+
 CREATE PROCEDURE SP_IntertarDetallesOrdenes
 AS
 	IF EXISTS(
@@ -118,4 +120,5 @@ AS
 		PRINT 'YA SE ENCUENTRAN REGISTRADOS LOS DETALLES DE LOS PEDIDOS'
 	END
 	GO
-GO```
+GO
+```
