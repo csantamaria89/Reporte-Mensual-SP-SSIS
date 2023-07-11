@@ -158,3 +158,8 @@ Ahora en el ControlFlow vamos a crear las variables que alojarán la ejecución 
 <p align="center">
 <img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen9.png"  height=150>
 </p>
+
+```Ruby
+execute sp_VentasCompaniaXpaisMayor25000
+execute SP_ReporteGeneral
+```
