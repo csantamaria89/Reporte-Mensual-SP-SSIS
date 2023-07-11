@@ -122,3 +122,34 @@ AS
 	GO
 GO
 ```
+En este punto configuraremos los SPs en nuestro proyecto de Integration Services:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen8.png"  height=550>
+</p>
+
+Finalmente vamos a generar los reportes esperados:
+
+Lo primero que debemos hacer es crear los SPs para los reportes:
+
+```Ruby
+CREATE PROCEDURE sp_VentasCompaniaXpaisMayor25000
+as
+select c.CompanyName,c.Country,sum(d.Quantity*d.UnitPrice) as TOTAL
+from Customers as c inner join orders as o
+on c.CustomerID=o.CustomerID
+inner join [Order Details] as d on o.OrderID=d.OrderID
+group by CompanyName,Country
+having sum(d.Quantity*d.UnitPrice)>25000
+```
+
+```Ruby
+CREATE PROCEDURE SP_ReporteGeneral
+AS
+select c.Country,c.CompanyName,c.CustomerID,o.OrderID,o.OrderDate,
+DATEPART(YYYY,o.orderdate) as año,DATEPART(mm,o.orderdate) as mes,
+p.ProductName,d.UnitPrice,d.Quantity,d.UnitPrice*d.Quantity as parcial
+from Customers as c inner join Orders o on c.CustomerID=o.CustomerID
+					inner join [Order Details] as d on d.OrderID=o.OrderID
+					inner join Products as p on p.ProductID=d.ProductID
+```
