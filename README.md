@@ -153,3 +153,8 @@ from Customers as c inner join Orders o on c.CustomerID=o.CustomerID
 					inner join [Order Details] as d on d.OrderID=o.OrderID
 					inner join Products as p on p.ProductID=d.ProductID
 ```
+Ahora en el ControlFlow vamos a crear las variables que alojarán la ejecución de los SPs:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen9.png"  height=150>
+</p>
