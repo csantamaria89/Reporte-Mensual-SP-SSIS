@@ -179,3 +179,19 @@ Procedemos a hacer lo mismo para la otra variable: ReporteGeneral
 <img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen11.png"  height=350>
 </p>
 
+Seleccinamos el archivo destino que serán dos archivos de texto plano "Flat File Destination"
+
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen12.png"  height=150>
+</p>
+
+Procedemos a hacer la configuración de cada uno, se ilustrara el primero que es el ReporteVentasCompañiaMayor25000:
+
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen13.png"  height=450>
+</p>
+<p align="center">
+<img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen14.png"  height=450>
+</p>
+
+Para el ReporteGeneral se repite el mismo procedimiento.
