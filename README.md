@@ -165,7 +165,7 @@ execute SP_ReporteGeneral
 ```
 Ahora vamos a agregar un Box de DataFlowTash llamado "Generar Reportes". Hacemos doble clic en la caja y configuramos los origenes. En este caso serían dos DB OLE:
 
-Para la primera caja que llamaremos "ReporteVentasMayor25000" hacemos la configuración de la BD origen llamada <b>NORTHWND</> En Data Acces Mode, seleccionamos SQL command from variable y seleccionamos la variable que creamos para la ejecución del SP:
+Para la primera caja que llamaremos "ReporteVentasMayor25000" hacemos la configuración de la BD origen llamada <b>NORTHWND</b> En Data Acces Mode, seleccionamos SQL command from variable y seleccionamos la variable que creamos para la ejecución del SP:
 
 <p align="center">
 <img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen10.png"  height=350>
