@@ -171,4 +171,4 @@ Para la primera caja que llamaremos "ReporteVentasMayor25000" hacemos la configu
 <img src="https://github.com/csantamaria89/Reporte-Mensual-SP-SSIS/blob/main/assets/Imagen10.png"  height=350>
 </p>
 
-Podemos hacer Clic en Preview para ver los datos que trae el SP.
+Podemos hacer Clic en Preview para ver los datos que trae el SP que acabamos de configurar.
